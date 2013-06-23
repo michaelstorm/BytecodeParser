@@ -31,7 +31,7 @@ public abstract class Op {
 	public final int code;
 	protected final OpParameterType[] parameterTypes;
 	private String name;
-	public Op(int code, OpParameterType... opParameterTypes) {
+	protected Op(int code, OpParameterType... opParameterTypes) {
 		this.code = code;
 		this.parameterTypes = opParameterTypes;
 	}

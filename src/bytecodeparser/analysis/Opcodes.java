@@ -35,6 +35,7 @@ import java.util.Map;
 
 import javassist.bytecode.Opcode;
 import bytecodeparser.Context;
+import bytecodeparser.analysis.decoders.DecodedBasicOp;
 import bytecodeparser.analysis.decoders.DecodedOp;
 import bytecodeparser.analysis.opcodes.ArrayCreationOpcode;
 import bytecodeparser.analysis.opcodes.ArrayOpcode;
@@ -215,10 +216,10 @@ public class Opcodes {
 		opcodes.put(Opcode.CASTORE, new ArrayOpcode(Opcode.CASTORE, false).setPops(ONE, ONE, ONE)); // ARRAY
 		opcodes.put(Opcode.SASTORE, new ArrayOpcode(Opcode.SASTORE, false).setPops(ONE, ONE, ONE)); // ARRAY
 		opcodes.put(Opcode.POP, new BasicOpcode(Opcode.POP).setPops(ONE));
-		opcodes.put(Opcode.POP2, new Op(Opcode.POP2) {
+		opcodes.put(Opcode.POP2, new BasicOpcode(Opcode.POP2) {
 			@Override
-			public DecodedOp decode(Context context, int index) {
-				return new DecodedOp(this, context, index) {
+			public DecodedBasicOp decode(Context context, int index) {
+				return new DecodedBasicOp(this, context, index) {
 					@Override
 					public void simulate(Stack stack) {
 						stack.stack.pop();
@@ -227,10 +228,10 @@ public class Opcodes {
 				};
 			}
 		});
-		opcodes.put(Opcode.DUP, new Op(Opcode.DUP) {
+		opcodes.put(Opcode.DUP, new BasicOpcode(Opcode.DUP) {
 			@Override
-			public DecodedOp decode(Context context, int index) {
-				return new DecodedOp(this, context, index) {
+			public DecodedBasicOp decode(Context context, int index) {
+				return new DecodedBasicOp(this, context, index) {
 					@Override
 					public void simulate(Stack stack) {
 						stack.push(stack.peek().copy());
@@ -238,10 +239,10 @@ public class Opcodes {
 				};
 			}
 		});
-		opcodes.put(Opcode.DUP_X1, new Op(Opcode.DUP_X1) {
+		opcodes.put(Opcode.DUP_X1, new BasicOpcode(Opcode.DUP_X1) {
 			@Override
-			public DecodedOp decode(Context context, int index) {
-				return new DecodedOp(this, context, index) {
+			public DecodedBasicOp decode(Context context, int index) {
+				return new DecodedBasicOp(this, context, index) {
 					@Override
 					public void simulate(Stack stack) {
 						StackElement se = stack.peek().copy();
@@ -250,10 +251,10 @@ public class Opcodes {
 				};
 			};
 		});
-		opcodes.put(Opcode.DUP_X2, new Op(Opcode.DUP_X2) {
+		opcodes.put(Opcode.DUP_X2, new BasicOpcode(Opcode.DUP_X2) {
 			@Override
-			public DecodedOp decode(Context context, int index) {
-				return new DecodedOp(this, context, index) {
+			public DecodedBasicOp decode(Context context, int index) {
+				return new DecodedBasicOp(this, context, index) {
 					@Override
 					public void simulate(Stack stack) {
 						StackElement se = stack.peek().copy();
@@ -262,10 +263,10 @@ public class Opcodes {
 				};
 			}
 		});
-		opcodes.put(Opcode.DUP2, new Op(Opcode.DUP2) {
+		opcodes.put(Opcode.DUP2, new BasicOpcode(Opcode.DUP2) {
 			@Override
-			public DecodedOp decode(Context context, int index) {
-				return new DecodedOp(this, context, index) {
+			public DecodedBasicOp decode(Context context, int index) {
+				return new DecodedBasicOp(this, context, index) {
 					@Override
 					public void simulate(Stack stack) {
 						StackElement[] elements = new StackElement[2];
@@ -277,10 +278,10 @@ public class Opcodes {
 				};
 			}
 		});
-		opcodes.put(Opcode.DUP2_X1, new Op(Opcode.DUP2_X1) {
+		opcodes.put(Opcode.DUP2_X1, new BasicOpcode(Opcode.DUP2_X1) {
 			@Override
-			public DecodedOp decode(Context context, int index) {
-				return new DecodedOp(this, context, index) {
+			public DecodedBasicOp decode(Context context, int index) {
+				return new DecodedBasicOp(this, context, index) {
 					@Override
 					public void simulate(Stack stack) {
 						StackElement[] elements = new StackElement[2];
@@ -292,9 +293,9 @@ public class Opcodes {
 				};
 			}
 		});
-		opcodes.put(Opcode.DUP2_X2, new Op(Opcode.DUP2_X2) {
-			public DecodedOp decode(Context context, int index) {
-				return new DecodedOp(this, context, index) {
+		opcodes.put(Opcode.DUP2_X2, new BasicOpcode(Opcode.DUP2_X2) {
+			public DecodedBasicOp decode(Context context, int index) {
+				return new DecodedBasicOp(this, context, index) {
 					@Override
 					public void simulate(Stack stack) {
 						StackElement[] elements = new StackElement[2];
@@ -306,10 +307,10 @@ public class Opcodes {
 				};
 			}
 		});
-		opcodes.put(Opcode.SWAP, new Op(Opcode.SWAP) {
+		opcodes.put(Opcode.SWAP, new BasicOpcode(Opcode.SWAP) {
 			@Override
-			public DecodedOp decode(Context context, int index) {
-				return new DecodedOp(this, context, index) {
+			public DecodedBasicOp decode(Context context, int index) {
+				return new DecodedBasicOp(this, context, index) {
 					@Override
 					public void simulate(Stack stack) {
 						StackElement se = stack.pop();
